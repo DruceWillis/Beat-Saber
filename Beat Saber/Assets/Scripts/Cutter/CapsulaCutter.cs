@@ -46,7 +46,9 @@ public class CapsulaCutter : MonoBehaviour
                 // top.GetComponent<MeshCollider>().enabled = false;
                 // bottom.GetComponent<MeshCollider>().enabled = false;
                 Vector3 cubePosition = hits[i].gameObject.transform.position;
-                Instantiate(sparks, new Vector3(cubePosition.x, cubePosition.y * 0.5f, cubePosition.z), Quaternion.identity);
+                ParticleSystem sparksInstance = Instantiate(sparks, new Vector3(cubePosition.x, cubePosition.y * 0.5f, cubePosition.z), Quaternion.identity);
+                sparksInstance.startColor = hits[i].gameObject.GetComponent<Cube>().color;
+                Destroy(sparksInstance, 1f);
                 Destroy(hits[i].gameObject);
 
                 // Destroy(bottom, 2f);
