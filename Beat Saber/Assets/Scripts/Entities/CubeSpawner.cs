@@ -43,7 +43,7 @@ public class CubeSpawner : MonoBehaviour, ICubeSpawner
             {
                 if (cubes[cubes.Count-1].GetComponent<Cube>().SpawnPosition.x == 1)
                     makeRedColor = true;
-                else
+                else if (cubes[cubes.Count-1].GetComponent<Cube>().SpawnPosition.x == 3)
                     makeRedColor = false;
             }
             int counter = 0;
