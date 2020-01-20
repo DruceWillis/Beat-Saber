@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class ColorLerper : MonoBehaviour
 {
+    [SerializeField] Color startColor;
+    [SerializeField] Color endColor;
+    
     public float speed = 1.0f;
-    public Color startColor;
-    public Color endColor;
+    
     float startTime;
 
     void Start()
     {
         startTime = Time.time;
-        // print(this.GetComponent<Renderer>().);
     }
 
 

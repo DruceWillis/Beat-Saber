@@ -6,6 +6,7 @@ using EzySlice;
 public class CapsulaCutter : MonoBehaviour
 {
     Transform cutCapsule;
+    
     public Material crossMaterial;
     public ParticleSystem sparks;
 
@@ -17,13 +18,7 @@ public class CapsulaCutter : MonoBehaviour
 
     void Update()
     {
-        // if (Input.GetKey(KeyCode.Mouse0))
-        // {
-        //     SliceSmth();
-        // }
-            SliceSmth();
-            
-
+        SliceSmth();
     }
 
     public void SliceSmth()

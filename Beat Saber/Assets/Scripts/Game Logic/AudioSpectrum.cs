@@ -30,15 +30,10 @@ public class AudioSpectrum : MonoBehaviour {
 	float countFrom = 0f;
     
     public GameObject cube;
-	public CubeSpawner cubeSpawner;
+	CubeSpawner cubeSpawner;
 
 	private void Update()
     {
-		// if (startSong)
-		// {
-		// 	audioSource.Play();
-		// 	startSong = false;
-		// }
 
 		if (startSong && countFrom == 0f)
 		{
@@ -49,7 +44,6 @@ public class AudioSpectrum : MonoBehaviour {
 		if (Time.time > countFrom + 2f && startSong)
 		{
 			audioSource.Play();
-			// Time.timeScale = 0f;
 			startSong = false;
 			spawnPrePlayCubes = false;
 		}
@@ -59,7 +53,6 @@ public class AudioSpectrum : MonoBehaviour {
             if (c == null)
             {
                 cubeSpawner.cubes.Remove(c);
-				// Debug.Log("Spawn pos: " + c.GetComponent<Cube>().SpawnPosition);
 				break;
             }
         }
@@ -86,7 +79,7 @@ public class AudioSpectrum : MonoBehaviour {
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();  
-        //audioSource.time = 5f;
+		cubeSpawner = FindObjectOfType<CubeSpawner>();
 
         if (preProcessSamples) {
 			preProcessedSpectralFluxAnalyzer = new SpectralFluxAnalyzer ();
@@ -190,9 +183,6 @@ public class AudioSpectrum : MonoBehaviour {
 
     public void spawnCubes(List<SpectralFluxInfo> pointInfo, int curIndex) {
 
-        // print ("I am lenfs: " + pointInfo.Count);
-        // print ("I am current indeksf!!! " + curIndex);
-
         if (pointInfo[curIndex].isPeak)
         {
 			// Debug.Log(string.Format (
@@ -205,7 +195,6 @@ public class AudioSpectrum : MonoBehaviour {
 			timeTracker = 0f;
 			cubeSpawner.CreateCube(cube, pointInfo[curIndex].spectralFlux);			
         }
-            // print("I am peak!");
 
 	}
 
