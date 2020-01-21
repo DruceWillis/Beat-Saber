@@ -30,7 +30,12 @@ public class CapsuleHitLogic : MonoBehaviour
         {
             Vector3 cubePosition = hits[i].gameObject.transform.position;
             
+            FindObjectOfType<ComboCounter>().counter++;
+            FindObjectOfType<Accuracy>().totalHitCounter++;
+            FindObjectOfType<Score>().AddPoints();
+
             GameObject sparksInstance = Instantiate(sparks, new Vector3(cubePosition.x, cubePosition.y * 0.5f, cubePosition.z), Quaternion.identity);
+            GetComponent<AudioSource>().PlayOneShot(GetComponent<AudioSource>().clip);
             
             var main = sparksInstance.GetComponent<ParticleSystem>().main;
             main.startColor = hits[i].gameObject.GetComponent<Cube>().color;

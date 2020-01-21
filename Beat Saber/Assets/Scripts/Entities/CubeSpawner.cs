@@ -8,7 +8,7 @@ public class CubeSpawner : MonoBehaviour, ICubeSpawner
     public List<GameObject> cubes  = new List<GameObject>();
     public bool makeRedColor = true;
 
-    int cubeCounter = 0;
+    public int cubeCounter = 0;
     bool spawnRight = true;
 
     public void CreateCube(GameObject prefab, float spectralFlux)
