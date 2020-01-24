@@ -34,20 +34,25 @@ public class CapsulaCutter : MonoBehaviour
             SlicedHull hull = SliceObject(hits[i].gameObject, crossMaterial);
             if (hull != null)
             {
-                // GameObject bottom = hull.CreateLowerHull(hits[i].gameObject, crossMaterial);
-                // GameObject top = hull.CreateUpperHull(hits[i].gameObject, crossMaterial);
-                // AddHullComponents(bottom);
-                // AddHullComponents(top);
-                // top.GetComponent<MeshCollider>().enabled = false;
-                // bottom.GetComponent<MeshCollider>().enabled = false;
+                GameObject bottom = hull.CreateLowerHull(hits[i].gameObject, crossMaterial);
+                GameObject top = hull.CreateUpperHull(hits[i].gameObject, crossMaterial);
+                AddHullComponents(bottom);
+                AddHullComponents(top);
+
+                top.GetComponent<MeshCollider>().enabled = false;
+                bottom.GetComponent<MeshCollider>().enabled = false;
+
                 Vector3 cubePosition = hits[i].gameObject.transform.position;
-                ParticleSystem sparksInstance = Instantiate(sparks, new Vector3(cubePosition.x, cubePosition.y * 0.5f, cubePosition.z), Quaternion.identity);
-                sparksInstance.startColor = hits[i].gameObject.GetComponent<Cube>().color;
-                Destroy(sparksInstance, 1f);
+
+                print(Input.mousePosition);
+
+                // ParticleSystem sparksInstance = Instantiate(sparks, new Vector3(cubePosition.x, cubePosition.y * 0.5f, cubePosition.z), Quaternion.identity);
+                // sparksInstance.startColor = hits[i].gameObject.GetComponent<Cube>().color;
+                // Destroy(sparksInstance, 1f);
                 Destroy(hits[i].gameObject);
 
-                // Destroy(bottom, 2f);
-                // Destroy(top, 2f);
+                Destroy(bottom, 2f);
+                Destroy(top, 2f);
 
             }
         }
