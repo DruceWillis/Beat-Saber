@@ -31,7 +31,7 @@ public class CubeSpawner : MonoBehaviour, ICubeSpawner
         
         if ((spectralFlux >= 0 && spectralFlux < 0.15f) || (spectralFlux >= 0.45f && spectralFlux < 0.6f) || (spectralFlux >= 1f && spectralFlux < 1.15f))
         {
-            SpawnPosition = new Vector3(1, 1, 0);
+            SpawnPosition = new Vector3(1, 0.75f, 0);
             makeRedColor = true;
             int counter = 0;
             if (cubes.Count > 3)
@@ -50,7 +50,7 @@ public class CubeSpawner : MonoBehaviour, ICubeSpawner
         }
         else if ((spectralFlux >= 0.15f && spectralFlux < 0.3f) || (spectralFlux >= 0.6f && spectralFlux < 0.75f) || (spectralFlux >= 1.45f && spectralFlux < 1.6f))
         {
-            SpawnPosition = new Vector3(2, 1, 0);
+            SpawnPosition = new Vector3(2, 0.75f, 0);
             int counter = 0;
             if (cubes.Count > 3)
             {
@@ -77,7 +77,7 @@ public class CubeSpawner : MonoBehaviour, ICubeSpawner
         }
         else
         {
-            SpawnPosition = new Vector3(3, 1, 0);
+            SpawnPosition = new Vector3(3, 0.75f, 0);
             makeRedColor = false;
             int counter = 0;
             if (cubes.Count > 3)

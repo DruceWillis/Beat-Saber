@@ -5,10 +5,10 @@ using EzySlice;
 
 public class CapsulaCutter : MonoBehaviour
 {
+    [SerializeField] GameObject sparks;
     Transform cutCapsule;
     
     public Material crossMaterial;
-    public ParticleSystem sparks;
 
     void Start()
     {
@@ -34,6 +34,8 @@ public class CapsulaCutter : MonoBehaviour
             SlicedHull hull = SliceObject(hits[i].gameObject, crossMaterial);
             if (hull != null)
             {
+                if (hits[i].gameObject.GetComponent<Cube>() == null)
+                    return;
                 GameObject bottom = hull.CreateLowerHull(hits[i].gameObject, crossMaterial);
                 GameObject top = hull.CreateUpperHull(hits[i].gameObject, crossMaterial);
                 AddHullComponents(bottom);
@@ -45,10 +47,17 @@ public class CapsulaCutter : MonoBehaviour
                 Vector3 cubePosition = hits[i].gameObject.transform.position;
 
                 print(Input.mousePosition);
+                FindObjectOfType<ComboCounter>().counter++;
+                FindObjectOfType<Accuracy>().totalHitCounter++;
+                FindObjectOfType<Score>().AddPoints();
 
-                // ParticleSystem sparksInstance = Instantiate(sparks, new Vector3(cubePosition.x, cubePosition.y * 0.5f, cubePosition.z), Quaternion.identity);
-                // sparksInstance.startColor = hits[i].gameObject.GetComponent<Cube>().color;
-                // Destroy(sparksInstance, 1f);
+                GameObject sparksInstance = Instantiate(sparks, new Vector3(cubePosition.x, cubePosition.y * 0.5f, cubePosition.z), Quaternion.identity);
+                GetComponent<AudioSource>().PlayOneShot(GetComponent<AudioSource>().clip);
+                
+                var main = sparksInstance.GetComponent<ParticleSystem>().main;
+                main.startColor = hits[i].gameObject.GetComponent<Cube>().color;
+
+                Destroy(sparksInstance, 1f);
                 Destroy(hits[i].gameObject);
 
                 Destroy(bottom, 2f);
