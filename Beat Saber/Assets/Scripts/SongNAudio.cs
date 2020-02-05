@@ -1,39 +1,43 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class SongNAudio : MonoBehaviour
 {
     public string path = null;
-    private AudioSource audioSource = null;
-    bool startedPlaying = false;
+    public AudioSource audioSource;
+    // Action<AudioClip> response;
+
 
     void Start()
     {
         audioSource = this.GetComponent<AudioSource>();
-        StartCoroutine(LoadSongCoroutine());    
+        StartCoroutine(LoadSong());
+        
     }
 
-    private IEnumerator LoadSongCoroutine()
+    private IEnumerator LoadSong()
     {
-        string url = string.Format("file://{0}", path);
-        WWW www = new WWW(url);
-        yield return www;
+        string url = path;
 
-        audioSource.clip = www.GetAudioClip(false, true);
-        audioSource.Play();
+        var request = UnityWebRequestMultimedia.GetAudioClip(url, AudioType.MPEG);
+
+        yield return request.SendWebRequest();
+
+        if (!request.isHttpError && !request.isNetworkError)
+        {
+            audioSource.clip = (DownloadHandlerAudioClip.GetContent(request));
+            path += string.Format("\n I got here");
+            audioSource.Play();
+        }
+        else
+        {
+            Debug.LogErrorFormat("error request [{0}, {1}]", url, request.error);
+            path += string.Format("error request [{0}, {1}]", url, request.error);
+        }
+
+        // request.Dispose();
     }
-
-    // void Update()
-    // {
-    //     if (path == null || startedPlaying)
-    //         return;
-    //     else
-    //     {
-    //         startedPlaying = true;
-    //         print("STARTING");
-    //         StartCoroutine(LoadSongCoroutine());    
-    //     }
-
-    // }
 }

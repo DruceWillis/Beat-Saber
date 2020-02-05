@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using SimpleFileBrowser;
+using System;
 
 public class FileBrowserTest : MonoBehaviour
 {
@@ -59,7 +60,9 @@ public class FileBrowserTest : MonoBehaviour
 		// Print whether a file is chosen (FileBrowser.Success)
 		// and the path to the selected file (FileBrowser.Result) (null, if FileBrowser.Success is false)
 		Debug.Log( FileBrowser.Success + " " + FileBrowser.Result );
-		FindObjectOfType<SongNAudio>().path = FileBrowser.Result;
+		FindObjectOfType<SongNAudio>().path = GetUri(FileBrowser.Result);
+
+
 		FindObjectOfType<SongNAudio>().enabled = true;
 		print(FindObjectOfType<SongNAudio>().path);
 		if( FileBrowser.Success )
@@ -68,6 +71,11 @@ public class FileBrowserTest : MonoBehaviour
 			// Contrary to File.ReadAllBytes, this function works on Android 10+, as well
 			byte[] bytes = FileBrowserHelpers.ReadBytesFromFile( FileBrowser.Result );
 		}
+	}
+
+	private string GetUri(string uri)
+	{
+	     return new Uri("file:///" + uri).AbsoluteUri;
 	}
 
 	public void OpenBrowser()
