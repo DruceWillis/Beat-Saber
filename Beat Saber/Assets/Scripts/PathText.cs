@@ -15,6 +15,11 @@ public class PathText : MonoBehaviour
 
     void Update()
     {
-        text.text = FindObjectOfType<SongNAudio>().path + "\n" + ((FindObjectOfType<SongNAudio>().audioSource.clip == null) ? "\nNo Clip" : FindObjectOfType<SongNAudio>().audioSource.time.ToString());  
+        var songNAudio = FindObjectOfType<SongNAudio>();
+
+        text.text =
+            songNAudio.url + "\n" +
+            "\n" +
+            (songNAudio.audioSource.clip == null ? "No Clip" : songNAudio.audioSource.time.ToString());
     }
 }
