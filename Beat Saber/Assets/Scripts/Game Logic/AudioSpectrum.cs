@@ -23,13 +23,14 @@ public class AudioSpectrum : MonoBehaviour {
 	AudioSource audioSource;
 
 	bool startSong = false;
-	bool spawnPrePlayCubes = false;
+	bool spawnPrePlayCubes;
 	public float timeStep = 0.2f;
 	float timeTracker = 0f;
 	float timer = 0f;
 	float countFrom = 0f;
     
     public GameObject cube;
+
 	CubeSpawner cubeSpawner;
 
 	private void Update()
@@ -41,7 +42,7 @@ public class AudioSpectrum : MonoBehaviour {
 			spawnPrePlayCubes = true;
 		}
 		
-		if (Time.time > countFrom + 2f && startSong)
+		if (Time.time > countFrom + 1.25f && startSong)
 		{
 			audioSource.Play();
 			startSong = false;
@@ -65,11 +66,11 @@ public class AudioSpectrum : MonoBehaviour {
 				int indexToUse = getIndexFromTime(timer) / 1024;
 				spawnCubes(preProcessedSpectralFluxAnalyzer.spectralFluxSamples, indexToUse);			
 			}
-			else
+			else if (!spawnPrePlayCubes && audioSource.isPlaying)
 			{
-				if (audioSource.time + 2f >= audioSource.clip.length)
+				if (audioSource.time + 1.25f >= audioSource.clip.length)
 					return;
-				int indexToUse = getIndexFromTime(audioSource.time + 2f) / 1024;
+				int indexToUse = getIndexFromTime(audioSource.time + 1.25f) / 1024;
 				spawnCubes(preProcessedSpectralFluxAnalyzer.spectralFluxSamples, indexToUse);	
 			}
 		}
@@ -193,7 +194,7 @@ public class AudioSpectrum : MonoBehaviour {
 			// 	pointInfo[curIndex].threshold
 			// ));
 			timeTracker = 0f;
-			cubeSpawner.CreateCube(cube, pointInfo[curIndex].spectralFlux);			
+			cubeSpawner.CreateCube(cube, pointInfo[curIndex].spectralFlux);
         }
 
 	}

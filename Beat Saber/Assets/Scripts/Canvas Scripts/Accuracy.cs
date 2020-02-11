@@ -8,6 +8,8 @@ public class Accuracy : MonoBehaviour, IAccuracy
     TextMeshProUGUI text;
 
     public int totalHitCounter {get; set;}
+    
+    float accuracy;
 
     void Start()
     {
@@ -17,7 +19,7 @@ public class Accuracy : MonoBehaviour, IAccuracy
 
     void Update()
     {
-        float accuracy = CalculateAccuracy();
+        accuracy = CalculateAccuracy();
         text.text = "\n" + accuracy + "%";
     }
 
@@ -26,6 +28,7 @@ public class Accuracy : MonoBehaviour, IAccuracy
         if (totalHitCounter + FindObjectOfType<Wall>().cubesMissed == 0)
             return 0;
 
-        return (totalHitCounter * 100) / (totalHitCounter + FindObjectOfType<Wall>().cubesMissed);
+        var accuracy = (totalHitCounter * 100) / (totalHitCounter + FindObjectOfType<Wall>().cubesMissed);
+        return accuracy == null ? 0 : accuracy;
     }
 }

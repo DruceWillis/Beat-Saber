@@ -12,9 +12,15 @@ public class Cube : MonoBehaviour, ICube
 
     void Start()
     {
+        if (this.gameObject.GetComponent<MeshCollider>() != null || this.gameObject.GetComponent<BoxCollider>() == null)
+        {
+            Destroy(this.gameObject, 1f);
+            return;
+        }
+        
         meshRenderer = GetComponent<MeshRenderer>();
         colorContainer = FindObjectOfType<ColorContainer>();
-        DecideCubeColor();
+        DecideCubeColor(); 
     }
 
     void Update()
@@ -31,7 +37,7 @@ public class Cube : MonoBehaviour, ICube
         }
         else if (SpawnPosition.x == 2)
         {
-            if (FindObjectOfType<CubeSpawner>().makeRedColor)
+            if (FindObjectOfType<CubeSpawner>().makeMiddleCubeRed)
             {
                 meshRenderer.material = colorContainer.red;
                 color = Color.red;
@@ -51,6 +57,6 @@ public class Cube : MonoBehaviour, ICube
 
     private void MoveCube()
     {
-        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, transform.localPosition.z + 12f * Time.deltaTime);
+        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, transform.localPosition.z + 6f * Time.deltaTime);
     }
 }

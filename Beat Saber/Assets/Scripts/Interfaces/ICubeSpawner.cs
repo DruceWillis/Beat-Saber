@@ -6,5 +6,5 @@ using UnityEngine;
 public interface ICubeSpawner
 {
     // List<GameObject> cubes { get; set; }
-    void CreateCube(GameObject prefab, float spectralFlux);
+    void CreateCube(GameObject prefab,  float spectralFlux);
 }

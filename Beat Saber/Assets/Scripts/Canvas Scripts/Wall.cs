@@ -13,9 +13,9 @@ public class Wall : MonoBehaviour, IWall
     }
 
     private void OnCollisionEnter(Collision other) {
-        if (other.gameObject.GetComponent<Cube>() == null)
+        if (other.gameObject.GetComponent<BoxCollider>() == null)
             return;
-        print("Counter dropped to 0");
+        // print("Counter dropped to 0");
         FindObjectOfType<ComboCounter>().counter = 0;
         cubesMissed++;
         Destroy(other.gameObject);

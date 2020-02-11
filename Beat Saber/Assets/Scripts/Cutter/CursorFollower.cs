@@ -46,7 +46,7 @@ public class CursorFollower : MonoBehaviour
 
         // print(angle + 90f);
 
-        float posZ = 2f;
+        float posZ = 2.5f;
         transform.position = Camera.main.ScreenToWorldPoint(new Vector3(posX, posY, posZ));
 
     }

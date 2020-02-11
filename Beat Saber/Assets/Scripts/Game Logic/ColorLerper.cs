@@ -19,6 +19,11 @@ public class ColorLerper : MonoBehaviour
 
     void Update()
     {
+        LerpColors();
+    }
+
+    private void LerpColors()
+    {
         float t = (Mathf.Sin(Time.time - startTime) * speed);
         var color = Color.Lerp(startColor, endColor, t);
         this.GetComponent<MeshRenderer>().material.SetColor("_BaseColor", color);

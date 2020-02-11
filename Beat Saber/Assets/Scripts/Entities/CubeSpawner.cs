@@ -6,14 +6,15 @@ using UnityEngine;
 public class CubeSpawner : MonoBehaviour, ICubeSpawner
 {
     public List<GameObject> cubes  = new List<GameObject>();
-    public bool makeRedColor = true;
+    public bool makeMiddleCubeRed = true;
+    public Vector3 SpawnPosition;
 
     public int cubeCounter = 0;
     bool spawnRight = true;
+    
 
     public void CreateCube(GameObject prefab, float spectralFlux)
     {
-        Vector3 SpawnPosition = Vector3.zero;
         SpawnPosition = DecideCubePosition(spectralFlux);
 
         GameObject cube = Instantiate(prefab, SpawnPosition, UnityEngine.Quaternion.identity);
@@ -22,17 +23,15 @@ public class CubeSpawner : MonoBehaviour, ICubeSpawner
         cubes.Add(cube);
 
         cube.name = string.Format("Cube number: {0} with Index: {1} ", cubeCounter, cubes.IndexOf(cube));
-        Destroy(cube, 3f);
+        // Destroy(cube, f);
     }
 
     private Vector3 DecideCubePosition(float spectralFlux)
     {
-        Vector3 SpawnPosition;
-        
         if ((spectralFlux >= 0 && spectralFlux < 0.15f) || (spectralFlux >= 0.45f && spectralFlux < 0.6f) || (spectralFlux >= 1f && spectralFlux < 1.15f))
         {
             SpawnPosition = new Vector3(1, 0.75f, 0);
-            makeRedColor = true;
+            makeMiddleCubeRed = true;
             int counter = 0;
             if (cubes.Count > 3)
             {
@@ -78,7 +77,7 @@ public class CubeSpawner : MonoBehaviour, ICubeSpawner
         else
         {
             SpawnPosition = new Vector3(3, 0.75f, 0);
-            makeRedColor = false;
+            makeMiddleCubeRed = false;
             int counter = 0;
             if (cubes.Count > 3)
             {
@@ -97,4 +96,5 @@ public class CubeSpawner : MonoBehaviour, ICubeSpawner
 
         return SpawnPosition;
     }
+
 }
