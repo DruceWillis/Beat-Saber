@@ -7,6 +7,6 @@ public class PanelController : MonoBehaviour
     void Update()
     {
         if (FindObjectOfType<CanvasController>().songWasChosen)
-            this.gameObject.SetActive(false);
+            gameObject.SetActive(false);
     }
 }

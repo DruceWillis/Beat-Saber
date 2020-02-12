@@ -17,7 +17,7 @@ public class PreloadedSongButton : MonoBehaviour
         songButtonsPanel.SetActive(true);
         loadCustomSongButton.SetActive(false);
 
-        // this.gameObject.GetComponentInChildren<TextMeshProUGUI>().enabled = false;
+        // GetComponentInChildren<TextMeshProUGUI>().enabled = false;
         // for (int i = 0; i < this.transform.childCount; i++)
         // {
         //     var child = this.transform.GetChild(i);
@@ -39,8 +39,8 @@ public class PreloadedSongButton : MonoBehaviour
 
     void DisableButton()
     {
-        this.gameObject.GetComponent<Button>().enabled = false;
-        this.gameObject.GetComponent<Image>().enabled = false;
-        this.gameObject.GetComponentInChildren<TextMeshProUGUI>().enabled = false;
+        GetComponent<Button>().enabled = false;
+        GetComponent<Image>().enabled = false;
+        GetComponentInChildren<TextMeshProUGUI>().enabled = false;
     }
 }

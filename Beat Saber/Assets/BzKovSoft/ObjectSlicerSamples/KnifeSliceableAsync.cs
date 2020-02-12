@@ -29,7 +29,7 @@ namespace BzKovSoft.ObjectSlicerSamples
 			if (knife == null)
 				return;
 
-			Rigidbody rigidbody = this.gameObject.GetComponent<Rigidbody>();
+			Rigidbody rigidbody = GetComponent<Rigidbody>();
 
 			rigidbody.useGravity = true;
 
@@ -45,7 +45,7 @@ namespace BzKovSoft.ObjectSlicerSamples
 			
 			yield return new WaitForSeconds(0.05f);
 			
-			this.gameObject.GetComponent<Rigidbody>().AddForce(new Vector3 (knife.MoveDirection.x*4, knife.MoveDirection.y*4, -3f), ForceMode.Impulse);
+			GetComponent<Rigidbody>().AddForce(new Vector3 (knife.MoveDirection.x*4, knife.MoveDirection.y*4, -3f), ForceMode.Impulse);
 			
 			Destroy(this.gameObject, 1f);
 			
@@ -62,7 +62,7 @@ namespace BzKovSoft.ObjectSlicerSamples
 			Vector3 normal = Vector3.Cross(knife.MoveDirection, knife.BladeDirection);
 			Plane plane = new Plane(normal, point);
 
-			if (this.gameObject.GetComponent<MeshCollider>() == null && this.gameObject.GetComponent<BoxCollider>() != null)
+			if (GetComponent<MeshCollider>() == null && GetComponent<BoxCollider>() != null)
 			{
 				FindObjectOfType<ComboCounter>().counter++;
 				FindObjectOfType<Accuracy>().totalHitCounter++;
@@ -80,14 +80,14 @@ namespace BzKovSoft.ObjectSlicerSamples
 			GameObject sparksInstance = Instantiate(sparks, new Vector3(cubePosition.x, cubePosition.y * 0.5f, cubePosition.z), Quaternion.identity);
                 
 			var main = sparksInstance.GetComponent<ParticleSystem>().main;
-			main.startColor = this.gameObject.GetComponent<Cube>().color;
+			main.startColor = GetComponent<Cube>().color;
 			
 
-			if (this.gameObject.GetComponent<MeshCollider>() != null)
-				this.gameObject.GetComponent<MeshCollider>().enabled = false;
+			if (GetComponent<MeshCollider>() != null)
+				GetComponent<MeshCollider>().enabled = false;
 
-			if (this.gameObject.GetComponent<BoxCollider>() != null)
-				this.gameObject.GetComponent<BoxCollider>().enabled = false;
+			if (GetComponent<BoxCollider>() != null)
+				GetComponent<BoxCollider>().enabled = false;
 
 			Destroy(sparksInstance, 1f);
 		}

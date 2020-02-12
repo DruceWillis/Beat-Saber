@@ -12,7 +12,7 @@ public class Cube : MonoBehaviour, ICube
 
     void Start()
     {
-        if (this.gameObject.GetComponent<MeshCollider>() != null || this.gameObject.GetComponent<BoxCollider>() == null)
+        if (GetComponent<MeshCollider>() != null || GetComponent<BoxCollider>() == null)
         {
             Destroy(this.gameObject, 1f);
             return;
